@@ -29,9 +29,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("BrandName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ModelName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("BrandId");
 
                     b.ToTable("Brands");
@@ -54,6 +51,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModelName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModelYear")

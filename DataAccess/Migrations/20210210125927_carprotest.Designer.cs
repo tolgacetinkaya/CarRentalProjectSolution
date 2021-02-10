@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(CarRentalProjectDbContext))]
-    [Migration("20210208232728_carprojectdbtest")]
-    partial class carprojectdbtest
+    [Migration("20210210125927_carprotest")]
+    partial class carprotest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,9 +29,6 @@ namespace DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("BrandName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ModelName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BrandId");
@@ -56,6 +53,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModelName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModelYear")

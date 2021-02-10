@@ -18,7 +18,7 @@ namespace ConsoleUI
 
             //BrandTest();
 
-            //CarTest();
+            CarTest();
 
         }
 
@@ -48,11 +48,12 @@ namespace ConsoleUI
             {
                 Console.WriteLine(" {0}  {1}  {2} renkli aracın günlük kirası {3} Türk lirasıdır.", car.BrandName, car.ModelName, car.ColorName, car.DailyPrice);
             }
-
+            Console.WriteLine("-------------");
             foreach (var car1 in carManager.GetCarsByBrandId(1))
             {
-                Console.WriteLine();
+                Console.WriteLine(" {0}  model Arabanın {1} Türk lirasıdır. {2}", car1.ModelName, car1.DailyPrice, car1.Description);
             }
+
         }
 
         private static void DeleteTestForCars(CarManager carManager)
@@ -70,7 +71,7 @@ namespace ConsoleUI
                 ColorId = 2,
                 ModelYear = new DateTime(2021, 5, 12),
                 DailyPrice = 525,
-                Description = ("Mercedes AMG G63 2019 Model Siyah renkli günlük kirası : 525 tl")
+                Description = ("Aylık kiralanırsa fiyatta %12,5 indirim olur")
 
             });
         }

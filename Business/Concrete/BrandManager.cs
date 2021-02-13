@@ -1,6 +1,6 @@
 ﻿using Business.Abstract;
-using Business.Utilities;
-using Business.ValidationRules.FluentValidation;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -16,31 +16,42 @@ namespace Business.Concrete
         {
             _brandDal = brandDal;
         }
-        public void Add(Brand brand)
+        public IResult Add(Brand brand)
         {
-            ValidationTool.Validate(new BrandValidator(), brand);
+            if (brand.BrandName.Length < 2)
+            {
+                return new ErrorResult(Messages.NameInValid);
+            }
             _brandDal.Add(brand);
+            return new SuccessResult();
+
         }
 
-        public void Delete(Brand brand)
+        public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
+            return new SuccessResult(Messages.DataDeleted);
         }
 
-        public List<Brand> GetAll()
+        public IDataResult<List<Brand>> GetAll()
         {
-            return _brandDal.GetAll();
+
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
         }
 
-        public Brand GetById(int brandId)
+        public IDataResult<Brand> GetById(int brandId)
         {
-            return _brandDal.Get(b => b.BrandId == brandId);
+            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == brandId));
         }
 
-        public void Update(Brand brand)
+        public IResult Update(Brand brand)
         {
-            ValidationTool.Validate(new BrandValidator(), brand);
+            if (brand.BrandName.Length < 2)
+            {
+                return new ErrorResult(Messages.NameInValid);
+            }
             _brandDal.Update(brand);
+            return new SuccessResult(Messages.DataUpdated);
         }
     }
 }

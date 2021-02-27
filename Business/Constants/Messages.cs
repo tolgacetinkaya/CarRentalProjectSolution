@@ -18,5 +18,9 @@ namespace Business.Constants
         public static string UserDeleted = "Kullanıcınız silinmiştir.";
         public static string CanNotBeRented = "Araç teslim edilmediği için kiralık olarak eklenemez";
         public static string RentalAdded = "Kiralık araçlar listesine eklendi";
+        public static string CarImageLimitExceded="Bir arabanın en fazla 5 resmi olabilir";
+        public static string CarImageDeleted="Fotoğraf silindi";
+        public static string CarIsNotExist="Böyle bir araç yok";
+        public static string FileUploadError = "Dosya yükleme hatası";
     }
 }

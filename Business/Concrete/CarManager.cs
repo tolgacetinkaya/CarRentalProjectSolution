@@ -2,6 +2,7 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.AutoFac.Caching;
 using Core.Aspects.AutoFac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
@@ -12,6 +13,10 @@ using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using Core.Aspects.Autofac.Logging;
+using Core.Aspects.AutoFac.Performance;
+using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
 
 namespace Business.Concrete
 {
@@ -23,8 +28,10 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        [SecuredOperation("car.add,admin")]
-        [ValidationAspect(typeof(CarValidator))]
+        //[SecuredOperation("car.add,admin")]
+        [LogAspect(typeof(FileLogger))]
+        [ValidationAspect(typeof(CarValidator), Priority = 1)]
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Car car)
         {
 
@@ -40,26 +47,34 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarDeleted);
         }
 
+        [LogAspect(typeof(DatabaseLogger))]
+        [CacheAspect(duration: 10)]
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
         }
 
+        [CacheAspect(duration: 10)]
         public IDataResult<Car> GetById(int Id)
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == Id));
         }
 
+        [CacheAspect(duration: 10)]
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
 
+        [PerformanceAspect(5)]
+        [CacheAspect(duration: 10)]
         public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
         {
+            Thread.Sleep(5000);
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == brandId), Messages.CarsListed);
         }
 
+        [CacheAspect(duration: 10)]
         public IDataResult<List<Car>> GetCarsByColorId(int colorId)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId), Messages.CarsListed);

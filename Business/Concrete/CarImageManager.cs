@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Aspects.AutoFac.Transaction;
 
 namespace Business.Concrete
 {
@@ -26,6 +27,7 @@ namespace Business.Concrete
             _carService = carService;
         }
 
+        [TransactionScopeAspect]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile formFile, CarImage carImage)
         {

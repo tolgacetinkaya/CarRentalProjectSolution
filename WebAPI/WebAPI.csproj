@@ -18,7 +18,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Images\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\1c1c82c0-728f-49d1-ac07-5bd24567b228.jpg" />
+    <None Include="wwwroot\images\1feab320-6962-4bdf-bcc2-8b78fec1c148.jpg" />
+    <None Include="wwwroot\images\3a0230e1-5fe5-4a0f-88b7-a36a3bdad27b.jpg" />
+    <None Include="wwwroot\images\533514fd-c19b-47e2-8eeb-ae23054539f6.jpg" />
+    <None Include="wwwroot\images\80a1b37f-a278-4238-99f0-555643c203cb.jpg" />
+    <None Include="wwwroot\images\cbf367ab-030e-421f-a2fb-28e830ab8f78.jpg" />
+    <None Include="wwwroot\images\DefaultCarPhoto.png" />
   </ItemGroup>
 
 

@@ -27,7 +27,7 @@ namespace Business.Concrete
             _carService = carService;
         }
 
-        [TransactionScopeAspect]
+       // [TransactionScopeAspect]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile formFile, CarImage carImage)
         {

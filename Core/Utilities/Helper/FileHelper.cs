@@ -14,13 +14,14 @@ namespace Core.Utilities.Helper
 
             if (file.Length > 0)
             {
-                string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).FullName + @"\WebAPI\Images");
+                string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).FullName + @"\WebAPI\wwwroot\images");
                 var uniqueFilename = Guid.NewGuid().ToString();
                 string fileExtension = new FileInfo(file.FileName).Extension;
-                string filePath = $@"{path}\{uniqueFilename}" + fileExtension;
+                string fileLocalPath = $@"{path}\{uniqueFilename}" + fileExtension;
+                string filePath = $@"{uniqueFilename}" + fileExtension;
 
 
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                using (var stream = new FileStream(fileLocalPath, FileMode.Create))
                 {
                     file.CopyTo(stream);
                 }

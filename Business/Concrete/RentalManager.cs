@@ -8,6 +8,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -18,6 +19,11 @@ namespace Business.Concrete
         public RentalManager(IRentalDal rentalDal)
         {
             _rentalDal = rentalDal;
+        }
+
+        public IDataResult<List<RentalDetailDto>> GetRentalDetails()
+        {
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
         }
 
         [ValidationAspect(typeof(RentalValidator))]
